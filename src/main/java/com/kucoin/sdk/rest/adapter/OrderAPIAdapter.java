@@ -3,6 +3,7 @@
  */
 package com.kucoin.sdk.rest.adapter;
 
+import com.kucoin.sdk.ProxySettings;
 import com.kucoin.sdk.rest.impl.retrofit.AuthRetrofitAPIImpl;
 import com.kucoin.sdk.rest.interfaces.OrderAPI;
 import com.kucoin.sdk.rest.interfaces.retrofit.OrderAPIRetrofit;
@@ -14,16 +15,27 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Created by chenshiwei on 2019/1/18.
  */
 public class OrderAPIAdapter extends AuthRetrofitAPIImpl<OrderAPIRetrofit> implements OrderAPI {
 
-    public OrderAPIAdapter(String baseUrl, String apiKey, String secret, String passPhrase, Integer apiKeyVersion) {
+    public OrderAPIAdapter(
+            String baseUrl,
+            String apiKey,
+            String secret,
+            Optional<ProxySettings> proxySettingsO,
+            boolean useProxy,
+            String passPhrase,
+            Integer apiKeyVersion)
+    {
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
         this.secret = secret;
+        this.proxySettingsO = proxySettingsO;
+        this.useProxy = useProxy;
         this.passPhrase = passPhrase;
         this.apiKeyVersion = apiKeyVersion;
     }

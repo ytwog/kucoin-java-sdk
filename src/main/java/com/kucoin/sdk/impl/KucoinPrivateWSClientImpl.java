@@ -21,6 +21,7 @@ import okhttp3.OkHttpClient;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -33,7 +34,7 @@ public class KucoinPrivateWSClientImpl extends BaseWebsocketImpl implements Kuco
 
     public KucoinPrivateWSClientImpl(KucoinClientBuilder kucoinClientBuilder) {
         this(
-                HttpClientFactory.getPublicClient(),
+                HttpClientFactory.getPublicClient(Optional.empty(), false),
                 new KucoinPrivateWebsocketListener(),
                 kucoinClientBuilder.getChooseServerStrategy(),
                 new WebsocketPrivateAPIAdaptor(kucoinClientBuilder.getBaseUrl(),

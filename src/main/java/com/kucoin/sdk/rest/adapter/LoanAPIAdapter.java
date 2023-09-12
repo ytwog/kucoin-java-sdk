@@ -3,6 +3,7 @@
  */
 package com.kucoin.sdk.rest.adapter;
 
+import com.kucoin.sdk.ProxySettings;
 import com.kucoin.sdk.rest.impl.retrofit.AuthRetrofitAPIImpl;
 import com.kucoin.sdk.rest.interfaces.LoanAPI;
 import com.kucoin.sdk.rest.interfaces.retrofit.LoanAPIRetrofit;
@@ -28,16 +29,27 @@ import com.kucoin.sdk.rest.response.UnsettledTradeItem;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by ezreal on 2020/12/08.
  */
 public class LoanAPIAdapter extends AuthRetrofitAPIImpl<LoanAPIRetrofit> implements LoanAPI {
 
-    public LoanAPIAdapter(String baseUrl, String apiKey, String secret, String passPhrase, Integer apiKeyVersion) {
+    public LoanAPIAdapter(
+            String baseUrl,
+            String apiKey,
+            String secret,
+            Optional<ProxySettings> proxySettingsO,
+            boolean useProxy,
+            String passPhrase,
+            Integer apiKeyVersion)
+    {
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
         this.secret = secret;
+        this.proxySettingsO = proxySettingsO;
+        this.useProxy = useProxy;
         this.passPhrase = passPhrase;
         this.apiKeyVersion = apiKeyVersion;
     }

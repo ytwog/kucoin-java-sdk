@@ -4,7 +4,9 @@
 package com.kucoin.sdk.rest.adapter;
 
 import java.io.IOException;
+import java.util.Optional;
 
+import com.kucoin.sdk.ProxySettings;
 import com.kucoin.sdk.rest.impl.retrofit.AuthRetrofitAPIImpl;
 import com.kucoin.sdk.rest.interfaces.WithdrawalAPI;
 import com.kucoin.sdk.rest.interfaces.retrofit.WithdrawalAPIRetrofit;
@@ -19,10 +21,20 @@ import com.kucoin.sdk.rest.response.WithdrawResponse;
  */
 public class WithdrawalAPIAdapter extends AuthRetrofitAPIImpl<WithdrawalAPIRetrofit> implements WithdrawalAPI {
 
-    public WithdrawalAPIAdapter(String baseUrl, String apiKey, String secret, String passPhrase, Integer apiKeyVersion) {
+    public WithdrawalAPIAdapter(
+            String baseUrl,
+            String apiKey,
+            String secret,
+            Optional<ProxySettings> proxySettingsO,
+            boolean useProxy,
+            String passPhrase,
+            Integer apiKeyVersion)
+    {
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
         this.secret = secret;
+        this.proxySettingsO = proxySettingsO;
+        this.useProxy = useProxy;
         this.passPhrase = passPhrase;
         this.apiKeyVersion = apiKeyVersion;
     }

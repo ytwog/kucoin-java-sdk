@@ -3,6 +3,7 @@
  */
 package com.kucoin.sdk.rest.adapter;
 
+import com.kucoin.sdk.ProxySettings;
 import com.kucoin.sdk.rest.impl.retrofit.AuthRetrofitAPIImpl;
 import com.kucoin.sdk.rest.interfaces.StopOrderAPI;
 import com.kucoin.sdk.rest.interfaces.retrofit.StopOrderAPIRetrofit;
@@ -18,13 +19,24 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class StopOrderAPIAdapter extends AuthRetrofitAPIImpl<StopOrderAPIRetrofit> implements StopOrderAPI {
 
-    public StopOrderAPIAdapter(String baseUrl, String apiKey, String secret, String passPhrase, Integer apiKeyVersion) {
+    public StopOrderAPIAdapter(
+            String baseUrl,
+            String apiKey,
+            String secret,
+            Optional<ProxySettings> proxySettingsO,
+            boolean useProxy,
+            String passPhrase,
+            Integer apiKeyVersion)
+    {
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
         this.secret = secret;
+        this.proxySettingsO = proxySettingsO;
+        this.useProxy = useProxy;
         this.passPhrase = passPhrase;
         this.apiKeyVersion = apiKeyVersion;
     }

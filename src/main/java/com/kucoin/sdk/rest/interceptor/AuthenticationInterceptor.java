@@ -5,7 +5,9 @@ package com.kucoin.sdk.rest.interceptor;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Optional;
 
+import com.kucoin.sdk.ProxySettings;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.HmacUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -46,7 +48,12 @@ public class AuthenticationInterceptor implements Interceptor {
      * @param passPhrase The API passphrase.
      * @throws KucoinApiException in case of any error
      */
-    public AuthenticationInterceptor(String apiKey, String secret, String passPhrase, Integer apiKeyVersion) {
+    public AuthenticationInterceptor(
+            String apiKey,
+            String secret,
+            String passPhrase,
+            Integer apiKeyVersion)
+    {
         this.apiKey = apiKey;
         this.secret = secret;
         this.passPhrase = passPhrase;

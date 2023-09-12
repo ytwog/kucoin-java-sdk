@@ -1,5 +1,6 @@
 package com.kucoin.sdk.rest.adapter;
 
+import com.kucoin.sdk.ProxySettings;
 import com.kucoin.sdk.rest.impl.retrofit.AuthRetrofitAPIImpl;
 import com.kucoin.sdk.rest.interfaces.IsolatedAPI;
 import com.kucoin.sdk.rest.interfaces.retrofit.IsolatedAPIRetrofit;
@@ -11,6 +12,7 @@ import com.kucoin.sdk.rest.response.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Jason Yao
@@ -18,10 +20,20 @@ import java.util.List;
  */
 public class IsolatedAPIAdapter extends AuthRetrofitAPIImpl<IsolatedAPIRetrofit> implements IsolatedAPI {
 
-    public IsolatedAPIAdapter(String baseUrl, String apiKey, String secret, String passPhrase, Integer apiKeyVersion) {
+    public IsolatedAPIAdapter(
+            String baseUrl,
+            String apiKey,
+            String secret,
+            Optional<ProxySettings> proxySettingsO,
+            boolean useProxy,
+            String passPhrase,
+            Integer apiKeyVersion)
+    {
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
         this.secret = secret;
+        this.proxySettingsO = proxySettingsO;
+        this.useProxy = useProxy;
         this.passPhrase = passPhrase;
         this.apiKeyVersion = apiKeyVersion;
     }

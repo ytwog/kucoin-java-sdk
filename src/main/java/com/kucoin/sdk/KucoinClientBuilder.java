@@ -4,6 +4,7 @@
 package com.kucoin.sdk;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import com.kucoin.sdk.rest.adapter.*;
 import com.kucoin.sdk.rest.interfaces.*;
@@ -29,6 +30,10 @@ public class KucoinClientBuilder {
     private String secret;
 
     private String passPhrase;
+
+    private Optional<ProxySettings> proxySettingsO = Optional.empty();
+
+    private boolean useProxy;
 
     /**
      * Version number of api-key, default 2
@@ -73,22 +78,22 @@ public class KucoinClientBuilder {
 
     public KucoinRestClient buildRestClient() {
         if (StringUtils.isBlank(baseUrl)) baseUrl = APIConstants.API_BASE_URL;
-        if (userAPI == null) userAPI = new UserAPIAdapter(baseUrl, apiKey, secret, passPhrase, apiKeyVersion);
-        if (accountAPI == null) accountAPI = new AccountAPIAdapter(baseUrl, apiKey, secret, passPhrase, apiKeyVersion);
-        if (depositAPI == null) depositAPI = new DepositAPIAdapter(baseUrl, apiKey, secret, passPhrase, apiKeyVersion);
-        if (withdrawalAPI == null) withdrawalAPI = new WithdrawalAPIAdapter(baseUrl, apiKey, secret, passPhrase, apiKeyVersion);
-        if (fillAPI == null) fillAPI = new FillAPIAdapter(baseUrl, apiKey, secret, passPhrase, apiKeyVersion);
-        if (orderAPI == null) orderAPI = new OrderAPIAdapter(baseUrl, apiKey, secret, passPhrase, apiKeyVersion);
-        if (stopOrderAPI == null) stopOrderAPI = new StopOrderAPIAdapter(baseUrl, apiKey, secret, passPhrase, apiKeyVersion);
-        if (marginAPI == null) marginAPI = new MarginAPIAdapter(baseUrl, apiKey, secret, passPhrase, apiKeyVersion);
-        if (loanAPI == null) loanAPI = new LoanAPIAdapter(baseUrl, apiKey, secret, passPhrase, apiKeyVersion);
-        if (isolatedAPI == null) isolatedAPI = new IsolatedAPIAdapter(baseUrl, apiKey, secret, passPhrase, apiKeyVersion);
-        if (currencyAPI == null) currencyAPI = new CurrencyAPIAdaptor(baseUrl);
-        if (timeAPI == null) timeAPI = new TimeAPIAdapter(baseUrl);
-        if (commonAPI == null) commonAPI = new CommonAPIAdapter(baseUrl);
-        if (symbolAPI == null) symbolAPI = new SymbolAPIAdaptor(baseUrl);
-        if (orderBookAPI == null) orderBookAPI = new OrderBookAPIAdapter(baseUrl, apiKey, secret, passPhrase, apiKeyVersion);
-        if (historyAPI == null) historyAPI = new HistoryAPIAdapter(baseUrl);
+        if (userAPI == null) userAPI = new UserAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (accountAPI == null) accountAPI = new AccountAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (depositAPI == null) depositAPI = new DepositAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (withdrawalAPI == null) withdrawalAPI = new WithdrawalAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (fillAPI == null) fillAPI = new FillAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (orderAPI == null) orderAPI = new OrderAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (stopOrderAPI == null) stopOrderAPI = new StopOrderAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (marginAPI == null) marginAPI = new MarginAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (loanAPI == null) loanAPI = new LoanAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (isolatedAPI == null) isolatedAPI = new IsolatedAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (currencyAPI == null) currencyAPI = new CurrencyAPIAdaptor(baseUrl, proxySettingsO, useProxy);
+        if (timeAPI == null) timeAPI = new TimeAPIAdapter(baseUrl, proxySettingsO, useProxy);
+        if (commonAPI == null) commonAPI = new CommonAPIAdapter(baseUrl, proxySettingsO, useProxy);
+        if (symbolAPI == null) symbolAPI = new SymbolAPIAdaptor(baseUrl, proxySettingsO, useProxy);
+        if (orderBookAPI == null) orderBookAPI = new OrderBookAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (historyAPI == null) historyAPI = new HistoryAPIAdapter(baseUrl, proxySettingsO, useProxy);
         return new KucoinRestClientImpl(this);
     }
 
@@ -112,6 +117,12 @@ public class KucoinClientBuilder {
         this.apiKey = apiKey;
         this.secret = secret;
         this.passPhrase = passPhrase;
+        return this;
+    }
+
+    public KucoinClientBuilder withProxy(ProxySettings proxySettings, boolean useProxy) {
+        this.proxySettingsO = Optional.of(proxySettings);
+        this.useProxy = useProxy;
         return this;
     }
 

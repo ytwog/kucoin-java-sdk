@@ -5,7 +5,9 @@ package com.kucoin.sdk.rest.adapter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
+import com.kucoin.sdk.ProxySettings;
 import com.kucoin.sdk.rest.impl.retrofit.PublicRetrofitAPIImpl;
 import com.kucoin.sdk.rest.interfaces.SymbolAPI;
 import com.kucoin.sdk.rest.interfaces.retrofit.SymbolAPIRetrofit;
@@ -19,8 +21,10 @@ import com.kucoin.sdk.rest.response.TickerResponse;
  */
 public class SymbolAPIAdaptor extends PublicRetrofitAPIImpl<SymbolAPIRetrofit> implements SymbolAPI {
 
-    public SymbolAPIAdaptor(String baseUrl) {
+    public SymbolAPIAdaptor(String baseUrl, Optional<ProxySettings> proxySettingsO, boolean useProxy) {
         this.baseUrl = baseUrl;
+        this.proxySettingsO = proxySettingsO;
+        this.useProxy = useProxy;
     }
 
     @Override

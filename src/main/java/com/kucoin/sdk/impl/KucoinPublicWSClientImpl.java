@@ -20,6 +20,7 @@ import com.kucoin.sdk.websocket.listener.KucoinPublicWebsocketListener;
 import okhttp3.OkHttpClient;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Created by chenshiwei on 2019/1/17.
@@ -31,7 +32,7 @@ public class KucoinPublicWSClientImpl extends BaseWebsocketImpl implements Kucoi
 
     public KucoinPublicWSClientImpl(KucoinClientBuilder kucoinClientBuilder) {
         this(
-                HttpClientFactory.getPublicClient(),
+                HttpClientFactory.getPublicClient(Optional.empty(), false),
                 new KucoinPublicWebsocketListener(),
                 kucoinClientBuilder.getChooseServerStrategy(),
                 new WebsocketPublicAPIAdaptor(kucoinClientBuilder.getBaseUrl()));

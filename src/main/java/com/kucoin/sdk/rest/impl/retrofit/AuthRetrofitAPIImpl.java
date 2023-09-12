@@ -25,7 +25,7 @@ public class AuthRetrofitAPIImpl<T> extends AbstractRetrofitAPIImpl<T> {
             @SuppressWarnings("unchecked")
             Class<T> tClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass())
                     .getActualTypeArguments()[0];
-            T t = RetrofitFactory.getAuthRetorfit(baseUrl, apiKey, secret, passPhrase, apiKeyVersion)
+            T t = RetrofitFactory.getAuthRetorfit(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion)
                     .create(tClass);
             apiImpl = t;
             return t;

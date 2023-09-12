@@ -3,6 +3,7 @@
  */
 package com.kucoin.sdk.rest.adapter;
 
+import com.kucoin.sdk.ProxySettings;
 import com.kucoin.sdk.rest.impl.retrofit.PublicRetrofitAPIImpl;
 import com.kucoin.sdk.rest.interfaces.HistoryAPI;
 import com.kucoin.sdk.rest.interfaces.retrofit.HistoryAPIRetrofit;
@@ -10,14 +11,17 @@ import com.kucoin.sdk.rest.response.TradeHistoryResponse;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by chenshiwei on 2019/1/22.
  */
 public class HistoryAPIAdapter extends PublicRetrofitAPIImpl<HistoryAPIRetrofit> implements HistoryAPI {
 
-    public HistoryAPIAdapter(String baseUrl) {
+    public HistoryAPIAdapter(String baseUrl, Optional<ProxySettings> proxySettingsO, boolean useProxy) {
         this.baseUrl = baseUrl;
+        this.proxySettingsO = proxySettingsO;
+        this.useProxy = useProxy;
     }
 
     @Override

@@ -4,6 +4,7 @@
 package com.kucoin.sdk.rest.impl.retrofit;
 
 import com.kucoin.sdk.KucoinObjectMapper;
+import com.kucoin.sdk.ProxySettings;
 import com.kucoin.sdk.exception.KucoinApiException;
 import com.kucoin.sdk.rest.response.KucoinResponse;
 import okhttp3.ResponseBody;
@@ -14,6 +15,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.util.Optional;
 
 /**
  * Created by chenshiwei on 2019/1/10.
@@ -32,6 +34,10 @@ public abstract class AbstractRetrofitAPIImpl<T> {
     protected String apiKey;
 
     protected String secret;
+
+    protected Optional<ProxySettings> proxySettingsO;
+
+    protected boolean useProxy;
 
     protected String passPhrase;
 
@@ -96,5 +102,21 @@ public abstract class AbstractRetrofitAPIImpl<T> {
 
     public void setPassPhrase(String passPhrase) {
         this.passPhrase = passPhrase;
+    }
+
+    public Optional<ProxySettings> getProxySettingsO() {
+        return proxySettingsO;
+    }
+
+    public void setProxySettingsO(Optional<ProxySettings> proxySettingsO) {
+        this.proxySettingsO = proxySettingsO;
+    }
+
+    public boolean isUseProxy() {
+        return useProxy;
+    }
+
+    public void setUseProxy(boolean useProxy) {
+        this.useProxy = useProxy;
     }
 }

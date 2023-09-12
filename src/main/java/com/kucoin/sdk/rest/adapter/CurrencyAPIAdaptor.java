@@ -3,6 +3,7 @@
  */
 package com.kucoin.sdk.rest.adapter;
 
+import com.kucoin.sdk.ProxySettings;
 import com.kucoin.sdk.rest.impl.retrofit.PublicRetrofitAPIImpl;
 import com.kucoin.sdk.rest.interfaces.CurrencyAPI;
 import com.kucoin.sdk.rest.interfaces.retrofit.CurrencyAPIRetrofit;
@@ -14,14 +15,17 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by chenshiwei on 2019/1/15.
  */
 public class CurrencyAPIAdaptor extends PublicRetrofitAPIImpl<CurrencyAPIRetrofit> implements CurrencyAPI {
 
-    public CurrencyAPIAdaptor(String baseUrl) {
+    public CurrencyAPIAdaptor(String baseUrl, Optional<ProxySettings> proxySettingsO, boolean useProxy) {
         this.baseUrl = baseUrl;
+        this.proxySettingsO = proxySettingsO;
+        this.useProxy = useProxy;
     }
 
     @Override
