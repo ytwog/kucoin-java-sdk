@@ -120,8 +120,8 @@ public class KucoinClientBuilder {
         return this;
     }
 
-    public KucoinClientBuilder withProxy(ProxySettings proxySettings, boolean useProxy) {
-        this.proxySettingsO = Optional.of(proxySettings);
+    public KucoinClientBuilder withProxy(Optional<ProxySettings> proxySettingsO, boolean useProxy) {
+        this.proxySettingsO = proxySettingsO;
         this.useProxy = useProxy;
         return this;
     }
