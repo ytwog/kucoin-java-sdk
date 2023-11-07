@@ -92,7 +92,7 @@ public class KucoinClientBuilder {
         if (timeAPI == null) timeAPI = new TimeAPIAdapter(baseUrl, proxySettingsO, useProxy);
         if (commonAPI == null) commonAPI = new CommonAPIAdapter(baseUrl, proxySettingsO, useProxy);
         if (symbolAPI == null) symbolAPI = new SymbolAPIAdaptor(baseUrl, proxySettingsO, useProxy);
-        if (orderBookAPI == null) orderBookAPI = new OrderBookAPIAdapter(baseUrl, apiKey, secret, proxySettingsO, useProxy, passPhrase, apiKeyVersion);
+        if (orderBookAPI == null) orderBookAPI = new OrderBookAPIAdapter(baseUrl, proxySettingsO, useProxy);
         if (historyAPI == null) historyAPI = new HistoryAPIAdapter(baseUrl, proxySettingsO, useProxy);
         return new KucoinRestClientImpl(this);
     }
